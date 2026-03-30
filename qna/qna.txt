@@ -1,0 +1,19 @@
+L17
+How do you create a PickUpItem method for a player in Go?
+Use the append function to add the item to the player's inventory slice, such as p.Inventory = append(p.Inventory, item), and optionally print a confirmation message like 'Picked up an item'
+
+What is the strategy for implementing a DropItem method in Go?
+Iterate through the inventory, find the item by name, then create a new slice by appending the slice before the item and the slice after the item using slice concatenation with the ellipsis operator
+
+How can you create an item struct in Go for a role-playing game?
+Define a struct with fields like Name and Type, for example:
+type Item struct {
+    Name string
+    Type string
+}
+
+What approach can be used to implement a UseItem method for a player?
+Range through the player's inventory, find the specific item by name, perform an action (like healing), and then remove the item from the inventory using slice manipulation
+
+When appending items to a slice in Go, how does memory allocation work?
+Go reuses the underlying array's length and capacity when appending, replacing values without necessarily creating an entirely new data structure, which helps maintain memory efficiency
