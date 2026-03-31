@@ -33,3 +33,19 @@ A logger provides a structured way to output messages, diagnose errors, and perf
 
 In Go, when should the PANIC keyword be used?
 PANIC should be reserved for situations that should never occur and where the application should completely stop if an error happens. It is not recommended for controlled or expected errors.
+
+L19
+What method is used to start an HTTP server in Go?
+Use server.ListenAndServe() method, which starts the server and begins listening for incoming HTTP requests
+
+What are the key timeout configurations for an HTTP server in Go?
+IdleTimeout (maximum time to wait for next request when Keepalives are enabled), ReadTimeout (maximum duration for reading entire request), and WriteTimeout (maximum time for writing response)
+
+What are the two arguments required for an HTTP handler function in Go?
+An HTTP ResponseWriter (w) and an HTTP Request pointer (r), with signatures matching http.ResponseWriter and *http.Request
+
+How do you bind a function to a specific route in a Go HTTP server?
+Use http.HandleFunc(), which takes a path (like "/health") and the handler function as arguments
+
+Why is the HTTP request parameter (r) a pointer in Go HTTP handlers?
+To efficiently persist and modify client request data, especially when working with middleware or request body processing
