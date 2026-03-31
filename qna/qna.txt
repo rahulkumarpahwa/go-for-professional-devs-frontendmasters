@@ -49,3 +49,19 @@ Use http.HandleFunc(), which takes a path (like "/health") and the handler funct
 
 Why is the HTTP request parameter (r) a pointer in Go HTTP handlers?
 To efficiently persist and modify client request data, especially when working with middleware or request body processing
+
+L20
+What Go standard library package allows parsing command-line flags?
+The flag package enables parsing command-line flags when executing a Go program, allowing users to specify parameters like port numbers with default values.
+
+How do you define a default flag value in Go's flag package?
+When using flag.IntVar(), you can specify a default value as the third parameter, such as setting a default port to 8080 if no flag is provided.
+
+What is the purpose of flag.Parse() in Go?
+flag.Parse() is essential for processing the command-line flags and populating the variables defined with flags, enabling the application to use the passed values.
+
+What is the difference between fmt.Printf() and fmt.Sprintf() in Go?
+fmt.Printf() prints directly to standard output, while fmt.Sprintf() returns a formatted string that can be stored or manipulated further.
+
+How can environment variables be retrieved in Go?
+Go provides os.Getenv() to retrieve environment variable values by their key, and third-party packages can make environment variable management even easier.
