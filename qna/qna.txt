@@ -65,3 +65,19 @@ fmt.Printf() prints directly to standard output, while fmt.Sprintf() returns a f
 
 How can environment variables be retrieved in Go?
 Go provides os.Getenv() to retrieve environment variable values by their key, and third-party packages can make environment variable management even easier.
+
+L21
+What is the primary purpose of the Chi package in Go?
+Chi is a lightweight, idiomatic, and composable router for building Go HTTP services that implements standard library interfaces and allows for easy routing and middleware handling
+
+What does the go.sum file represent in a Go project?
+The go.sum file provides exact hashes for dependencies pulled into the application, similar to package-lock.json in web development, to ensure consistent and reproducible builds
+
+What method is used to create a new router in Chi?
+The chi.NewRouter() method is used to create a new router in the Chi package
+
+How do you define a GET route using Chi?
+Use the r.Get() method, specifying the path and handler function, such as r.Get('/health', app.HealthCheck)
+
+What is the primary benefit of using method receivers on structs in Go?
+Method receivers allow you to define methods that are associated with specific struct types, enabling object-oriented-like behavior and more organized code structure
