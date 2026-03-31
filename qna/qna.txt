@@ -17,3 +17,19 @@ Range through the player's inventory, find the specific item by name, perform an
 
 When appending items to a slice in Go, how does memory allocation work?
 Go reuses the underlying array's length and capacity when appending, replacing values without necessarily creating an entirely new data structure, which helps maintain memory efficiency
+
+L18
+What is the recommended approach for structuring the main.go file in a Go project?
+Keep main.go slim and simple, using it as an entry point to the application. Use other data structures and packages to handle core implementation and functionality.
+
+When designing a package in Go, what is the first question to ask about data handling?
+Determine if a struct is needed. Ask: 'Does this package need a struct?' A struct is a good solution when you need to pass resources around the application.
+
+What are the two components returned by a constructor function in Go?
+A constructor typically returns a pointer to a struct (e.g., a pointer to Application) and a potential error.
+
+What is the purpose of using a logger in a Go application?
+A logger provides a structured way to output messages, diagnose errors, and perform print debugging across the application. It can include additional information like timestamps.
+
+In Go, when should the PANIC keyword be used?
+PANIC should be reserved for situations that should never occur and where the application should completely stop if an error happens. It is not recommended for controlled or expected errors.
