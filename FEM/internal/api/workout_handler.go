@@ -1,7 +1,9 @@
 package api
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -9,10 +11,12 @@ import (
 )
 
 type WorkoutHandler struct {
+	store *sql.DB
+	logger *log.Logger
 }
 
-func NewWorkoutHandler() *WorkoutHandler {
-	return &WorkoutHandler{}
+func NewWorkoutHandler(store *sql.DB, logger *log.Logger) *WorkoutHandler {
+	return &WorkoutHandler{store: store, logger: logger}
 }
 
 func (h *WorkoutHandler) HandleGetWorkoutById(w http.ResponseWriter, r *http.Request) {

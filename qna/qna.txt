@@ -113,3 +113,19 @@ What is the default port for Postgres?
 
 What Docker Compose command is used to start a containerized database?
 docker compose up --build (must go to the folder which has yml file)
+
+L24
+Which Postgres SQL driver is recommended for Go, and how can it be installed?
+PGX is recommended, and it can be installed using 'go get github.com/jackC/pgx/v4/stdlib'
+
+What are the typical connection parameters for connecting to a local Postgres database in this example?
+host=localhost, user=postgres, password=postgres, dbname=postgres, port=5432, sslmode=disable
+
+What Go standard library package is used for database connections?
+database/sql package
+
+How does Go's defer function work in the context of database connection closing?
+Defer ensures a function is called at the end of the program's execution, after all other operations are complete, which is useful for closing database connections
+
+What method is used to open a database connection in Go?
+sql.Open() method, which takes a driver name and a connection string as arguments
