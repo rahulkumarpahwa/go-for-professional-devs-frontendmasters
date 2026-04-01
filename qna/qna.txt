@@ -100,3 +100,16 @@ GET method for retrieving a workout by ID (/workouts/{id}) and POST method for c
 
 What is the purpose of creating separate packages like 'api' and 'store'?
 To organize code by separating concerns, such as API handlers and database interactions, making the application more modular and maintainable
+
+L23
+What command is used to ignore database files in Git?
+Use touch .gitignore to create a gitignore file, then add /database and database to the file to prevent database files from being pushed to GitHub.
+
+What is the purpose of defining a volume in a Docker Compose configuration?
+To persist data between Docker container restarts, preventing data loss when the database is stopped and started
+
+What is the default port for Postgres?
+5432
+
+What Docker Compose command is used to start a containerized database?
+docker compose up --build (must go to the folder which has yml file)
