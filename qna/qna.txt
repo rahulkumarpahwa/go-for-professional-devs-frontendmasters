@@ -81,3 +81,7 @@ Use the r.Get() method, specifying the path and handler function, such as r.Get(
 
 What is the primary benefit of using method receivers on structs in Go?
 Method receivers allow you to define methods that are associated with specific struct types, enabling object-oriented-like behavior and more organized code structure
+
+L22
+// curl localhost:8080/workouts/2
+// curl -X POST localhost:8080/workouts
