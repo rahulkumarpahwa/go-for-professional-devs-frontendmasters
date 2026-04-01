@@ -85,3 +85,18 @@ Method receivers allow you to define methods that are associated with specific s
 L22
 // curl localhost:8080/workouts/2
 // curl -X POST localhost:8080/workouts
+
+What method is used to extract URL parameters using the chi router?
+chi.URLParam() is used to extract URL parameters from the HTTP request
+
+What standard library package is used for string conversion to integers?
+strconv package is used for string conversion, specifically the ParseInt() function
+
+How is the application structure organized to manage handlers and routes?
+An application struct is used to contain handlers, which can then be passed to routes to centralize access to different handler methods
+
+What are the two HTTP methods implemented for the workout routes?
+GET method for retrieving a workout by ID (/workouts/{id}) and POST method for creating a workout (/workouts)
+
+What is the purpose of creating separate packages like 'api' and 'store'?
+To organize code by separating concerns, such as API handlers and database interactions, making the application more modular and maintainable
