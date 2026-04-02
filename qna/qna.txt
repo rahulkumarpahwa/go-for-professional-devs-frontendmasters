@@ -129,3 +129,19 @@ Defer ensures a function is called at the end of the program's execution, after 
 
 What method is used to open a database connection in Go?
 sql.Open() method, which takes a driver name and a connection string as arguments
+
+L25
+What is Goose and what primary purpose does it serve in database management?
+Goose is a database migration tool for Go that allows modifications to database schema structure, enabling developers to add, change, or revert database changes safely and flexibly
+
+What are the key fields in the users table migration?
+The users table includes ID (BIGSERIAL primary key), username (VARCHAR, unique, not null), email (VARCHAR, unique, not null), password_hash (VARCHAR), bio (text), created_at (timestamp), and updated_at (timestamp)
+
+What is the relationship between workouts and workout_entries in the database schema?
+Workouts and workout_entries have a one-to-many relationship, where one workout can have multiple workout entries. The workout_entries table has a foreign key referencing the workouts table with ON DELETE CASCADE
+
+What constraint is added to the workout_entries table to validate entries?
+A constraint is added to ensure that a workout entry must have either reps or duration_seconds non-null, but not both, allowing for different types of exercises like weightlifting or running
+
+What fields are included in the workout_entries table?
+The workout_entries table includes ID, workout_ID (foreign key), exercise_name, sets, reps, duration_seconds, weight, notes, order_index, created_at, and updated_at
