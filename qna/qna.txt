@@ -145,3 +145,17 @@ A constraint is added to ensure that a workout entry must have either reps or du
 
 What fields are included in the workout_entries table?
 The workout_entries table includes ID, workout_ID (foreign key), exercise_name, sets, reps, duration_seconds, weight, notes, order_index, created_at, and updated_at
+
+L26
+
+What two arguments does the migrate function take?
+The migrate function takes a pointer to sql.DB and a directory string as arguments
+
+How does Goose determine which migration files to run?
+Goose uses goose.Up() to run migration files from a specified directory, and goose.SetBaseFS() to set the file system containing the migration files
+
+What command can be used to connect to the Postgres database and verify migrations?
+psql -h localhost -p 5432 can be used to connect to the Postgres database, and \dt command lists the database tables
+
+What does the MigrateFS() function do in the database migration process?
+MigrateFS() sets the base file system for migrations, calls the Migrate function, and ensures the base file system is reset after migration
