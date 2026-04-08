@@ -10,7 +10,7 @@ import (
 )
 
 func Open() (*sql.DB, error) {
-	DB, err := sql.Open("pgx", "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable")
+	DB, err := sql.Open("pgx", "host=localhost user=postgres password=postgres dbname=postgres port=5433 sslmode=disable")
 	if err != nil {
 		return nil, fmt.Errorf("DB : open %w\n", err)
 	}
@@ -29,7 +29,7 @@ func Open() (*sql.DB, error) {
 func MigrateFS(db *sql.DB, migrationsFS fs.FS, dir string) error {
 	goose.SetBaseFS(migrationsFS)
 
-	defer func(){
+	defer func() {
 		goose.SetBaseFS(nil)
 	}()
 
