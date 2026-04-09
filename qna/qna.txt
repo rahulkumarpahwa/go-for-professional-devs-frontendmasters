@@ -208,3 +208,19 @@ workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, and orde
 
 How is database transaction error handling implemented in the CreateWorkout method?
 A deferred transaction rollback is used, and errors are checked at each stage of the process. If an error occurs, the method returns nil and the error, and the transaction can be rolled back to its previous state.
+
+L30
+What command can be used to view all schemas created through Goose migration in PostgreSQL?
+\dt command in PSQL can be used to view all schemas created through Goose migration
+
+How can you verify database entries after creating a new workout?
+Use 'select all from workouts' and 'select all from workout_entries' SQL commands to view the newly inserted data
+
+What key attributes are included when creating a new workout entry?
+Title, description, duration minutes, calories burned, and a list of workout entries with exercise names
+
+What columns are displayed when selecting from the workouts table?
+ID, title, description, duration, calories burned, created at, and updated at
+
+How can you confirm that workout entries are correctly linked to a workout?
+Check that the workout_entries table has a workout_id column matching the ID of the corresponding workout in the workouts table
