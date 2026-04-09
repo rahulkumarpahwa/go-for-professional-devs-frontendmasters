@@ -192,3 +192,19 @@ Use json.NewEncoder(w).Encode(createdWorkout) to write the struct as a JSON resp
 
 What status code represents an internal server error in HTTP?
 http.StatusInternalServerError (500) represents an internal server error when something goes wrong processing a request
+
+L29
+Note : 
+We can't rollback after commit.
+
+What is the purpose of using a database transaction in the CreateWorkout method?
+To ensure that both the workout and its associated workout entries are committed together, maintaining data integrity. If any part of the process fails, the transaction can be rolled back to prevent partial data insertion.
+
+What PostgreSQL notation is used for parameterized queries in this code?
+The money symbol ($1, $2, $3, $4) is used to represent query parameters, with the number corresponding to the order of values being inserted.
+
+What fields are inserted when creating a workout entry?
+workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, and order_index
+
+How is database transaction error handling implemented in the CreateWorkout method?
+A deferred transaction rollback is used, and errors are checked at each stage of the process. If an error occurs, the method returns nil and the error, and the transaction can be rolled back to its previous state.
