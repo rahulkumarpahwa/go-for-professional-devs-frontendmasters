@@ -25,7 +25,7 @@ type WorkoutEntry struct {
 	Description     string   `json:"description"`
 	Sets            int      `json:"sets"`
 	Reps            *int     `json:"reps"`
-	DurationSeconds int      `json:"duration_seconds"`
+	DurationSeconds *int     `json:"duration_seconds"`
 	Weight          *float64 `json:"weight"`
 	Notes           string   `json:"notes"`
 	OrderIndex      int      `json:"order_index"`
