@@ -1,21 +1,21 @@
 package api
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/rahulkumarpahwa/femProject/internal/store"
 )
 
 type WorkoutHandler struct {
-	store *sql.DB
+	store  store.WorkoutStore
 	logger *log.Logger
 }
 
-func NewWorkoutHandler(store *sql.DB, logger *log.Logger) *WorkoutHandler {
+func NewWorkoutHandler(store store.WorkoutStore, logger *log.Logger) *WorkoutHandler {
 	return &WorkoutHandler{store: store, logger: logger}
 }
 

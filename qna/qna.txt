@@ -162,3 +162,17 @@ MigrateFS() sets the base file system for migrations, calls the Migrate function
 
 
 L27
+What is the purpose of a struct tag in Go, specifically the json tag?
+A struct tag helps with encoding and decoding JSON into a struct, allowing easy conversion between JSON payloads and struct fields with matching tag names.
+
+Why might a field like 'Reps' be defined as a pointer to an int in a struct?
+To explicitly allow checking for nil values, which provides more flexibility in handling optional or potentially unset numeric fields.
+
+What is an interface in Go?
+An interface is a collection of method signatures that defines a set of behaviors. When a type implements all the methods in an interface, it can be used as that interface type.
+
+How does using an interface help with database decoupling in Go?
+By defining a WorkoutStore interface with method signatures, the application layer can work with the interface without being tied to a specific database implementation, making future migrations easier.
+
+What are the two methods defined in the WorkoutStore interface?
+CreateWorkout (which takes a pointer to a Workout and returns a pointer to a Workout and an error) and GetWorkoutByID (which takes an int64 ID and returns a Workout or an error).
