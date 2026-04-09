@@ -25,7 +25,7 @@ func NewApplication() (*Application, error) {
 		return nil, err
 	}
 
-	err = store.MigrateFS(pgDB, migrations.FS ,".")
+	err = store.MigrateFS(pgDB, migrations.FS ,".") // . means the root fof the FS and migrations is here the package and FS is embedded variable we created in fs.go
 	if err !=nil{
 		panic(err)
 	}

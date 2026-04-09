@@ -32,7 +32,7 @@ func Open() (*sql.DB, error) {
 }
 
 func MigrateFS(db *sql.DB, migrationsFS fs.FS, dir string) error {
-	goose.SetBaseFS(migrationsFS)
+	goose.SetBaseFS(migrationsFS) // tell goose from where to read the files
 
 	defer func() {
 		goose.SetBaseFS(nil)
@@ -42,13 +42,13 @@ func MigrateFS(db *sql.DB, migrationsFS fs.FS, dir string) error {
 }
 
 func Migrate(db *sql.DB, dir string) error {
-	err := goose.SetDialect("postgres")
+	err := goose.SetDialect("postgres") // choosing the DB
 
 	if err != nil {
 		return fmt.Errorf("Migrate : %w", err)
 	}
 
-	err = goose.Up(db, dir)
+	err = goose.Up(db, dir) // what command to run (up or down) and from what folder in passed FS to read (because FS may have the multiple folder)
 	if err != nil {
 		return fmt.Errorf("Goose Up : %w", err)
 	}
