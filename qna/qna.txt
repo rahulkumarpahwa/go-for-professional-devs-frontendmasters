@@ -176,3 +176,19 @@ By defining a WorkoutStore interface with method signatures, the application lay
 
 What are the two methods defined in the WorkoutStore interface?
 CreateWorkout (which takes a pointer to a Workout and returns a pointer to a Workout and an error) and GetWorkoutByID (which takes an int64 ID and returns a Workout or an error).
+
+L28
+What method is used to decode JSON request body in Go?
+json.NewDecoder(r.Body).Decode(&workout) is used to parse JSON from the request body into a struct
+
+What is the purpose of using an interface like WorkoutStore in this context?
+The interface allows decoupling the API layer from the specific database implementation, enabling easier database swapping and maintaining flexibility across application layers
+
+How do you set the response content type in an HTTP handler?
+Use w.Header().Set("Content-Type", "application/json") to set the response content type to JSON
+
+How can you encode a response struct back to the client?
+Use json.NewEncoder(w).Encode(createdWorkout) to write the struct as a JSON response
+
+What status code represents an internal server error in HTTP?
+http.StatusInternalServerError (500) represents an internal server error when something goes wrong processing a request
