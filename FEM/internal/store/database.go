@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"io/fs"
+	"time"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/pressly/goose/v3"
@@ -20,7 +21,11 @@ func Open() (*sql.DB, error) {
 		return nil, fmt.Errorf("db: open %w", err)
 	}
 
-	// TODO : Add enhanced configuration to the connection pool settings with: db.SetMaxOpenConns(), db.SetMaxIdleConns(), and db.SetConnMaxIdleTime()
+	// Add enhanced configuration to the connection pool settings with: db.SetMaxOpenConns(), db.SetMaxIdleConns(), and db.SetConnMaxIdleTime()
+	DB.SetMaxOpenConns(25)
+	DB.SetMaxIdleConns(10)
+	DB.SetConnMaxIdleTime(5 * time.Minute)
+	DB.SetConnMaxLifetime(30 * time.Minute)
 
 	fmt.Println("Connected to Database Successfully!")
 	return DB, nil
