@@ -22,7 +22,6 @@ type WorkoutEntry struct {
 	ID              int      `json:"id"`
 	WorkoutId       int      `json:"workout_id"`
 	ExerciseName    string   `json:"exercise_name"`
-	Description     string   `json:"description"`
 	Sets            int      `json:"sets"`
 	Reps            *int     `json:"reps"`
 	DurationSeconds *int     `json:"duration_seconds"`
@@ -59,6 +58,10 @@ func (pgws *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, err
 
 	err = tx.QueryRow(query, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurned).Scan(&workout.ID)
 
+	if err == sql.ErrNoRows{
+		return nil, err
+	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -89,18 +92,50 @@ func (pgws *PostgresWorkoutStore) GetWorkoutById(id int64) (*Workout, error) {
 	// we can't commit after rollback.
 	defer tx.Rollback()
 
-	query := `SELECT id, title, description, duration_minutes, calories_burned, entries FROM workouts WHERE id = $1;`
+	query := `SELECT id, title, description, duration_minutes, calories_burned, created_at, updated_at FROM workouts WHERE id = $1;`
 
 	row := tx.QueryRow(query, id)
 
 	workout := &Workout{}
-	row.Scan(&workout.ID, &workout.Title, &workout.Description, &workout.DurationMinutes, &workout.CaloriesBurned, &workout.Entries)
-	// we also to do entries
+	err = row.Scan(&workout.ID, &workout.Title, &workout.Description, &workout.DurationMinutes, &workout.CaloriesBurned, &workout.CreatedAt, &workout.UpdatedAt)
 
-	err = tx.Commit()
+	if err == sql.ErrNoRows {
+		return nil, err
+	}
+
 	if err != nil {
 		return nil, err
 	}
 
+	// we also to do entries
+	entriesQuery := `SELECT id, workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index FROM workout_entries WHERE workout_id = $1 
+	ORDER BY order_index
+	`
+	rows, err := tx.Query(entriesQuery, id)
+	if err == sql.ErrNoRows {
+		return nil, err
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var entries []WorkoutEntry
+	for rows.Next() {
+		var entry WorkoutEntry
+		err := rows.Scan(&entry.ID, &entry.WorkoutId, &entry.ExerciseName, &entry.Sets, &entry.Reps, &entry.DurationSeconds, &entry.Weight, &entry.Notes, &entry.OrderIndex)
+		if err != nil {
+			return nil, err
+		}
+		entries = append(entries, entry)
+	}
+
+	workout.Entries = append(workout.Entries, entries...)
+	err = tx.Commit()
+	if err != nil {
+		return nil, err
+	}
 	return workout, nil
 }

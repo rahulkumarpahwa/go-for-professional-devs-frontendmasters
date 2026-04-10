@@ -224,3 +224,23 @@ ID, title, description, duration, calories burned, created at, and updated at
 
 How can you confirm that workout entries are correctly linked to a workout?
 Check that the workout_entries table has a workout_id column matching the ID of the corresponding workout in the workouts table
+
+DOCKER COMMAND TO CONNECT TO DB :
+docker exec -it workoutDB psql -U postgres -h localhost -p 5432
+
+L31
+What SQL method is used to execute 
+a query that returns at most one row?
+QueryRow is used to execute a query that is expected to return at most one row
+
+What error type indicates that no rows were returned from a database query?
+sql.ErrNoRows is returned by Row scan when a database query does not return any rows
+
+When retrieving database rows, what method is used to iterate through multiple results?
+rows.Next() is used to iterate through multiple database query results
+
+What function is used to add items to a slice in Go?
+append() is used to add items to a slice
+
+In a database query, what keyword is used to specify the order of returned results?
+ORDER BY is used to specify the order of returned database results
