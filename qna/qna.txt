@@ -244,3 +244,20 @@ append() is used to add items to a slice
 
 In a database query, what keyword is used to specify the order of returned results?
 ORDER BY is used to specify the order of returned database results
+
+L32
+
+What method is used to handle updating workout entries in this implementation?
+A full patch update where all existing workout entries are deleted and then reinserted with the new data, instead of updating individual entries
+
+How does the code check if an update actually modified any rows?
+By using the RowsAffected() method on the query result, which returns the number of rows affected, and checking if rowsAffected is zero
+
+What database operation is used to manage the update process to ensure data consistency?
+A database transaction is used, which allows beginning a transaction, performing updates, and then either committing the changes or rolling back if an error occurs
+
+In the SQL update query for workouts, what fields are being updated?
+Title, description, duration_minutes, and calories_burned, using a query that sets these fields where the workout ID matches
+
+What is the approach for inserting updated workout entries after deletion?
+Iterating through the workout entries, constructing an INSERT query with fields like workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, and order_index

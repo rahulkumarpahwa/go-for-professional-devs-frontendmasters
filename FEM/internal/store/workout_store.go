@@ -2,6 +2,7 @@ package store
 
 import (
 	"database/sql"
+	"errors"
 	"log"
 	"time"
 )
@@ -42,6 +43,7 @@ func NewPostgresWorkoutStore(db *sql.DB, logger *log.Logger) *PostgresWorkoutSto
 type WorkoutStore interface {
 	CreateWorkout(*Workout) (*Workout, error)
 	GetWorkoutById(int int64) (*Workout, error)
+	UpdateWorkout(*Workout) error
 }
 
 func (pgws *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error) {
@@ -58,7 +60,7 @@ func (pgws *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, err
 
 	err = tx.QueryRow(query, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurned).Scan(&workout.ID)
 
-	if err == sql.ErrNoRows{
+	if err == sql.ErrNoRows {
 		return nil, err
 	}
 
@@ -138,4 +140,55 @@ func (pgws *PostgresWorkoutStore) GetWorkoutById(id int64) (*Workout, error) {
 		return nil, err
 	}
 	return workout, nil
+}
+
+func (pgws *PostgresWorkoutStore) UpdateWorkout(workout *Workout) error {
+
+	tx, err := pgws.db.Begin()
+
+	if err != nil {
+		return err
+	}
+
+	defer tx.Rollback()
+
+	query := `UPDATE workouts SET title = $1, description = $2, duration_minutes = $3, calories_burned = $4 WHERE id = $5`
+
+	result, err := tx.Exec(query, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurned, workout.ID)
+	if err != nil {
+		return err
+
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return nil
+	}
+
+	if rowsAffected == 0 {
+		return errors.New("No Rows Affected!")
+	}
+
+	// update entries by Putting the new in the place of old instead of updating each one.
+
+	_, err = tx.Exec(`DELETE FROM workout_entries WHERE workout_id = $1 `, workout.ID)
+	if err != nil {
+		return nil
+	}
+
+	for _, entry := range workout.Entries {
+		query := `INSERT INTO workout_entries (workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id;`
+
+		_, err := tx.Exec(query, workout.ID, entry.ExerciseName, entry.Sets, entry.Reps, entry.DurationSeconds, entry.Weight, entry.Notes, entry.OrderIndex)
+		if err != nil {
+			return err
+		}
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
