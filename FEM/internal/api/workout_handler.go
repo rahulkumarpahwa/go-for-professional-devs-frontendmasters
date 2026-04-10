@@ -157,7 +157,7 @@ func (h *WorkoutHandler) HandleDeleteWorkoutByID(w http.ResponseWriter, r *http.
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusNoContent)
 	json.NewEncoder(w).Encode("Workout Deleted Successfully!")
 
 }

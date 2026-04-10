@@ -296,3 +296,19 @@ Check the number of rows affected, return sql.ErrNoRows if 0 rows were affected
 
 What are the steps to implement a delete operation in a database-driven application?
 Update database layer interface, 2. Create delete method in database store, 3. Create handler function, 4. Add route for delete operation
+
+L35
+What is the purpose of the Envelope type in the writeJSON function?
+The Envelope is a map with a string key and an interface{} value, allowing flexible JSON serialization by enabling different types of data to be passed, such as error messages or success data like workout structs
+
+How does json.MarshalIndent() differ from standard JSON marshaling?
+It allows for indentation of JSON fields by specifying a prefix and indent, making the JSON output more readable compared to compact JSON
+
+What does the chi.URLParam() function do in the readIDParam function?
+It extracts a URL parameter from an HTTP request, specifically retrieving the 'ID' parameter as a string from the request
+
+What conversion is performed on the ID parameter in the readIDParam function?
+The ID parameter is converted from a string to an int64 using strconv.ParseInt() with base 10, allowing numeric processing of the URL parameter
+
+What are the two primary functions being created in the utils package?
+The two functions are writeJSON (for standardized JSON response writing) and readIDParam (for extracting and converting ID parameters from HTTP requests)
