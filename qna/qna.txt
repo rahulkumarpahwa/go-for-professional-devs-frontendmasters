@@ -280,3 +280,19 @@ The handler first decodes the request into a pointer-based struct, then checks e
 
 What is the purpose of using json tags in the UpdateWorkoutRequest struct?
 JSON tags define how struct fields are mapped during JSON decoding, allowing the fields to match the expected JSON keys from the client request. This ensures that JSON data is correctly parsed into the struct fields during the update process.
+
+L34
+What SQL operation is used to remove a record from the workouts table?
+DELETE FROM workouts WHERE id = ?
+
+What HTTP method is used to delete a resource in RESTful design?
+DELETE
+
+What HTTP status code is typically returned for a successful deletion with no content to send back?
+HTTP 204 No Content
+
+When deleting a workout, what additional check is performed to verify the deletion was successful?
+Check the number of rows affected, return sql.ErrNoRows if 0 rows were affected
+
+What are the steps to implement a delete operation in a database-driven application?
+Update database layer interface, 2. Create delete method in database store, 3. Create handler function, 4. Add route for delete operation
