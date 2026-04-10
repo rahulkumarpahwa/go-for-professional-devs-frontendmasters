@@ -261,3 +261,22 @@ Title, description, duration_minutes, and calories_burned, using a query that se
 
 What is the approach for inserting updated workout entries after deletion?
 Iterating through the workout entries, constructing an INSERT query with fields like workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, and order_index
+
+L33
+
+What is the purpose of creating a pointer-based struct for update workout requests?
+To allow checking if values are truly nil or intended to be empty, which helps distinguish between intentional updates and zero values. This enables more precise server-side validation by differentiating between unset fields and explicitly empty fields.
+
+Why are pointer types used for Title, Description, DurationMinutes, and CaloriesBurned in the update request struct?
+
+
+Because pointer types have a nil zero value, which allows distinguishing between unset fields and fields with zero/empty values. This provides more confidence in processing client requests by enabling precise field update checks.
+
+What is the key difference between using pointer and non-pointer types for struct fields during JSON decoding?
+Pointer types allow checking if a field was explicitly set or not, while non-pointer types default to zero values. This enables more granular validation of incoming JSON data by detecting whether a field was intentionally updated or left unmodified.
+
+How does the update workout handler validate and apply updates from a client request?
+The handler first decodes the request into a pointer-based struct, then checks each field for non-nil values. If a field is not nil, it updates the corresponding field in the existing workout object before calling the UpdateWorkout method in the data store.
+
+What is the purpose of using json tags in the UpdateWorkoutRequest struct?
+JSON tags define how struct fields are mapped during JSON decoding, allowing the fields to match the expected JSON keys from the client request. This ensures that JSON data is correctly parsed into the struct fields during the update process.

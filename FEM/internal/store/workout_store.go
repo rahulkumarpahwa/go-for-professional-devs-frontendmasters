@@ -177,7 +177,7 @@ func (pgws *PostgresWorkoutStore) UpdateWorkout(workout *Workout) error {
 	}
 
 	for _, entry := range workout.Entries {
-		query := `INSERT INTO workout_entries (workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id;`
+		query := `INSERT INTO workout_entries (workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 
 		_, err := tx.Exec(query, workout.ID, entry.ExerciseName, entry.Sets, entry.Reps, entry.DurationSeconds, entry.Weight, entry.Notes, entry.OrderIndex)
 		if err != nil {
