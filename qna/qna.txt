@@ -312,3 +312,20 @@ The ID parameter is converted from a string to an int64 using strconv.ParseInt()
 
 What are the two primary functions being created in the utils package?
 The two functions are writeJSON (for standardized JSON response writing) and readIDParam (for extracting and converting ID parameters from HTTP requests)
+
+L36
+
+How can you improve error handling when writing server responses using a logger?
+Use a logger to write detailed error messages, utilize the utils.writeJSON function with specific HTTP status codes, and create an Envelope with an error key to send structured error responses to the client
+
+What is the purpose of the utils.Envelope function in JSON responses?
+The utils.Envelope function provides a flexible way to structure JSON responses by allowing dynamic key-value pairs, making it easier to return different types of data with a consistent response format
+
+What are the recommended best practices for handling errors in HTTP handlers?
+Log detailed error messages for internal debugging, use appropriate HTTP status codes (like StatusBadRequest or StatusInternalServerError), and provide generic error messages to clients that don't expose sensitive internal details
+
+What HTTP status codes are typically used for different error scenarios?
+StatusBadRequest (400) for client-side errors like invalid input, StatusInternalServerError (500) for server-side errors like database failures, and StatusOK (200) for successful operations
+
+How can you simplify JSON response handling in Go HTTP handlers?
+Create a utility function like utils.writeJSON that accepts an http.ResponseWriter, status code, and an Envelope, which abstracts the process of writing JSON responses and error handling
