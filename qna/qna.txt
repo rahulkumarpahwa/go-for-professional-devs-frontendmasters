@@ -329,3 +329,19 @@ StatusBadRequest (400) for client-side errors like invalid input, StatusInternal
 
 How can you simplify JSON response handling in Go HTTP handlers?
 Create a utility function like utils.writeJSON that accepts an http.ResponseWriter, status code, and an Envelope, which abstracts the process of writing JSON responses and error handling
+
+L37
+What is table-driven testing in Go, and how does it relate to anonymous structs?
+Table-driven testing in Go is a testing approach where test cases are defined using a slice of anonymous structs, allowing multiple test scenarios to be defined concisely. Anonymous structs are particularly useful in this approach as they can quickly define test inputs and expected outputs without creating separate named types.
+
+Why create a separate test database instead of using mocks or in-memory databases?
+Creating a separate test database allows for testing the actual SQL queries and database interactions directly, ensuring the integrity of database operations. This approach provides more realistic testing compared to mocks, especially when custom SQL queries are being used.
+
+What are the key considerations when setting up a test database in Docker Compose?
+When setting up a test database in Docker Compose, key considerations include: using a different container name, using a different volume path, ensuring the database runs on a different port than the main database, and using the same database image as the production database.
+
+What is the philosophy behind meaningful testing in software development?
+Meaningful testing focuses on gaining actual value from tests, rather than simply writing tests to demonstrate test coverage. The goal is to validate the functionality and integrity of code, ensuring that tests provide genuine insights into the system's behavior.
+
+What is Test-Driven Development (TDD), and what are potential drawbacks?
+Test-Driven Development (TDD) is an approach where tests are written before the actual code implementation. Potential drawbacks include the repetitive nature of running tests multiple times and the potential overhead of constantly switching between writing tests and implementation code.
