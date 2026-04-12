@@ -345,3 +345,19 @@ Meaningful testing focuses on gaining actual value from tests, rather than simpl
 
 What is Test-Driven Development (TDD), and what are potential drawbacks?
 Test-Driven Development (TDD) is an approach where tests are written before the actual code implementation. Potential drawbacks include the repetitive nature of running tests multiple times and the potential overhead of constantly switching between writing tests and implementation code.
+
+L38
+What is the purpose of the 'testify' package in Go testing?
+Testify is an industry-standard Go testing package that provides utilities for asserting values, checking for errors, and creating mocks in test cases
+
+What is the recommended practice for handling a test database in Go testing?
+Use a separate test database that is wiped clean between test suites to prevent contamination between different test cases, ensuring each test starts with a blank slate
+
+What command is used to install the testify package?
+go get github.com/stretcher/testify
+
+What SQL command is used to truncate tables in the test database?
+TRUNCATE workouts and workout_entry CASCADE
+
+What port is typically used for the test database in this example?
+Port 5433, which is different from the main database running on port 5432
