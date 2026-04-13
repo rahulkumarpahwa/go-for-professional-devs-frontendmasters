@@ -410,3 +410,19 @@ The method uses a regex pattern to validate email format, returning an error if 
 
 Why is backend validation important even if frontend validation exists?
 Backend validation provides an additional layer of protection against incorrect or malicious data that might slip through frontend validation, preventing improper data from being persisted in the database
+
+L45
+What are the parameters of the handleRegisterUser function?
+The function takes an HTTP response writer (w) and a pointer to an HTTP request (r)
+
+How do you decode JSON request data in the register user handler?
+Use json.NewDecoder(r.Body).Decode(&request) to decode the request body into a registerUserRequest struct
+
+What steps are taken if JSON decoding fails during user registration?
+Log an error, use utils.WriteJSON() to send a bad request status, and return an error envelope with an invalid payload message
+
+How is a new user created in the registration process?
+Create a store.User with the username and email from the request. If bio is provided, also set the user's bio field
+
+What validation is performed on the register user request?
+Use validateRegisterUserRequest() function to validate the request, which returns an error if validation fails
