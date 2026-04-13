@@ -361,3 +361,19 @@ TRUNCATE workouts and workout_entry CASCADE
 
 What port is typically used for the test database in this example?
 Port 5433, which is different from the main database running on port 5432
+
+L42
+What are the fields in the user struct?
+ID (int), username (string), email (string), password (custom password struct), bio (string), created_at (time.Time), updated_at (time.Time)
+
+What three methods are defined in the UserStore interface?
+CreateUser (takes a user, returns an error), GetUserByUsername (takes a username string, returns a user pointer and error), UpdateUser (takes a user pointer, returns an error)
+
+What package is used for password hashing?
+golang.org/x/crypto/bcrypt
+
+What fields does the password struct contain?
+plainText (pointer to a string), hash (slice of bytes)
+
+What struct is created to handle Postgres database communication?
+PostgresUserStore, which contains a field for sql.DB
