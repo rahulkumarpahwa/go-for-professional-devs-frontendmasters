@@ -442,4 +442,20 @@ What is the recommended default work factor for bcrypt password hashing?
 12 is considered a good middle ground for balancing security and computational performance
 
 Why is it important to provide a generic error message during failed login attempts?
-To prevent potential attackers from gaining information about existing user accounts by not explicitly revealing whether the username or password was incorrect
+To prevent potential attackers from gaining information about existing user accounts by not explicitly revealing whether the username or password was incorrect\
+
+L47
+What are the three main types of authentication methods discussed?
+OAuth 2.0, 2. Stateless token authentication (JWT), 3. Stateful token authentication
+
+What are the key characteristics of a JSON Web Token (JWT)?
+A JWT is encoded into three parts: 1. Hashing algorithm, 2. Signing signature, 3. User-selected encoded information. It is typically stored client-side and contains authentication information within the token itself.
+
+What is a major limitation of JWT authentication?
+Once a JWT is issued, it cannot be revoked. To invalidate a token, the entire signing method must be changed, which can affect all tokens in the system.
+
+What are the key advantages of stateful token authentication?
+The backend maintains complete control over the token, 2. Tokens can be easily revoked by deleting them from the database, 3. No need to change signing methods when revoking a token
+
+What is a potential drawback of stateful token authentication?
+It requires an additional database call to verify the token's integrity, which can slightly increase authentication processing time
