@@ -394,3 +394,19 @@ Use result.RowsAffected() to check the number of rows updated. Return sql.ErrNoR
 
 What fields are typically included when creating a new user in a PostgreSQL database?
 Typical fields include username, email, password hash, bio, created_at, and updated_at.
+
+L44
+What are the fields in the UserHandler struct?
+The UserHandler struct has two fields: UserStore (of type store.UserStore) and a logger (pointer to log.logger)
+
+What fields are included in the registeruserrequest struct?
+The registeruserrequest struct includes username (string), email (string), password (string), and bio (string)
+
+What is the purpose of the validateRegisterRequest method?
+The method performs server-side validation for user registration, checking for empty or invalid fields like username, email, and password
+
+How does the email validation work in the registration process?
+The method uses a regex pattern to validate email format, returning an error if the email does not match the specified regex pattern
+
+Why is backend validation important even if frontend validation exists?
+Backend validation provides an additional layer of protection against incorrect or malicious data that might slip through frontend validation, preventing improper data from being persisted in the database
