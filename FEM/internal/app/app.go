@@ -14,6 +14,7 @@ import (
 
 type Application struct {
 	WorkoutHandler *api.WorkoutHandler
+	UserHandler    *api.UserHandler
 	Logger         *log.Logger
 	DB             *sql.DB
 }
@@ -25,8 +26,8 @@ func NewApplication() (*Application, error) {
 		return nil, err
 	}
 
-	err = store.MigrateFS(pgDB, migrations.FS ,".") // . means the root fof the FS and migrations is here the package and FS is embedded variable we created in fs.go
-	if err !=nil{
+	err = store.MigrateFS(pgDB, migrations.FS, ".") // . means the root fof the FS and migrations is here the package and FS is embedded variable we created in fs.go
+	if err != nil {
 		panic(err)
 	}
 
@@ -34,11 +35,14 @@ func NewApplication() (*Application, error) {
 
 	// creating the WorkoutStore
 	workoutStore := store.NewPostgresWorkoutStore(pgDB, logger)
+	userStore := store.NewPostgresUserStore(pgDB, logger)
 
 	// our handlers will go here
 	workoutHandler := api.NewWorkoutHandler(workoutStore, logger)
 
-	app := &Application{Logger: logger, WorkoutHandler: workoutHandler, DB: pgDB}
+	userHandler := api.NewUserHandler(userStore, logger)
+
+	app := &Application{Logger: logger, WorkoutHandler: workoutHandler, UserHandler: userHandler, DB: pgDB}
 	return app, nil
 }
 

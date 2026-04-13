@@ -47,7 +47,7 @@ func (h *UserHandler) validateRegisterRequest(req *registerUserRequest) error {
 	}
 
 	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
-	if emailRegex.MatchString(req.Email) {
+	if !emailRegex.MatchString(req.Email) {
 		return errors.New("Invalid Email!")
 	}
 
@@ -76,11 +76,22 @@ func (h *UserHandler) HandleRegisterUser(w http.ResponseWriter, r *http.Request)
 	}
 
 	if req.Bio != "" {
-		h.logger.Printf("ERROR : required Bio!: %v", err)
-		utils.WriteJson(w, http.StatusBadRequest, utils.Envelope{"error": "Required Bio!"})
+		user.Bio = req.Bio
+	}
+
+	err = user.PasswordHash.Set(req.Password)
+	if err != nil {
+		h.logger.Printf("ERROR : hashing password: %v", err)
+		utils.WriteJson(w, http.StatusInternalServerError, utils.Envelope{"error": "Internal Server Error"})
 		return
 	}
 
-	h.store.CreateUser(user)
+	err = h.store.CreateUser(user)
+	if err != nil {
+		h.logger.Printf("ERROR : registering user: %v", err)
+		utils.WriteJson(w, http.StatusInternalServerError, utils.Envelope{"error": "Internal Server Error"})
+		return
+	}
 
+	utils.WriteJson(w, http.StatusOK, utils.Envelope{"message": "User Created Successfully!", "user": user})
 }

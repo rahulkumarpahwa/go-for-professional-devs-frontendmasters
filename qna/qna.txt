@@ -426,3 +426,20 @@ Create a store.User with the username and email from the request. If bio is prov
 
 What validation is performed on the register user request?
 Use validateRegisterUserRequest() function to validate the request, which returns an error if validation fails
+
+L46
+
+What is a recommended security practice when storing user passwords?
+Hash the password instead of storing it in plain text to reduce potential security risks and protect user data
+
+What is the purpose of the bcrypt.GenerateFromPassword() method?
+To transform a plain text password into a secure hashed representation using a hashing algorithm with a configurable work factor (salt)
+
+What does the work factor (salt) in password hashing represent?
+A value that determines the computational complexity of the hashing process. Higher values increase security but take longer to compute, while lower values are faster but less secure
+
+What is the recommended default work factor for bcrypt password hashing?
+12 is considered a good middle ground for balancing security and computational performance
+
+Why is it important to provide a generic error message during failed login attempts?
+To prevent potential attackers from gaining information about existing user accounts by not explicitly revealing whether the username or password was incorrect
