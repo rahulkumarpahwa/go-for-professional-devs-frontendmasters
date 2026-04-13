@@ -459,3 +459,24 @@ The backend maintains complete control over the token, 2. Tokens can be easily r
 
 What is a potential drawback of stateful token authentication?
 It requires an additional database call to verify the token's integrity, which can slightly increase authentication processing time
+
+L48
+
+// goose migration command: (run in root of the project folder)
+goose -dir migrations postgres "postgres://postgres:postgres@localhost:5433/postgres?sslmode=disable" up
+
+
+What PostgreSQL command creates a table only if it does not already exist?
+CREATE TABLE IF NOT EXISTS
+
+What SQL constraint ensures that a referenced user is deleted along with its associated tokens?
+ON DELETE CASCADE
+
+What PostgreSQL data type is used for storing byte array values in the tokens table?
+bytea
+
+What command is used to apply database migrations with Goose?
+goose postgres 'connection_string'
+
+What database schema fields are defined in the tokens table?
+hash (bytea), user_id (bigint), expiry (timestamp with time zone), scope (text)
