@@ -377,3 +377,20 @@ plainText (pointer to a string), hash (slice of bytes)
 
 What struct is created to handle Postgres database communication?
 PostgresUserStore, which contains a field for sql.DB
+
+L43
+
+What method is used to scan returning fields when creating a user in PostgreSQL?
+The Scan() method is used to scan returning fields into the appropriate struct fields, typically scanning ID, CreatedAt, and UpdatedAt fields by passing their memory addresses.
+
+How do you handle the case when no rows are returned in a SELECT query?
+Check if the error is sql.ErrNoRows, in which case you can return nil, nil to indicate no error occurred and no data was found.
+
+What PostgreSQL function is used to automatically update the timestamp in an update query?
+CURRENT_TIMESTAMP is the native Postgres function used to automatically set the updated timestamp when updating a record.
+
+What steps are taken to check row update success in a PostgreSQL update operation?
+Use result.RowsAffected() to check the number of rows updated. Return sql.ErrNoRows if zero rows were affected, otherwise return nil if the update was successful.
+
+What fields are typically included when creating a new user in a PostgreSQL database?
+Typical fields include username, email, password hash, bio, created_at, and updated_at.
