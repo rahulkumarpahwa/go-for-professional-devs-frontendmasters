@@ -551,3 +551,20 @@ The GetUserToken method uses SHA-256 hashing to generate a hash of the token, an
 
 What specific values are scanned when retrieving a user from the token?
 The method scans the following user values: ID, Username, Email, PasswordHash, Bio, CreatedAt, and UpdatedAt from the database query result.
+
+L53
+
+What is the purpose of creating a custom context key type in Go?
+To prevent collisions when storing values in context, by creating a unique type (even if it's still a string) that ensures type safety and unique indexing when retrieving values from the context
+
+How can you add a value to the context of an HTTP request in Go?
+Use r.WithContext(context.WithValue(r.Context(), contextKey, value)), which creates a new context with the added value and returns a modified request
+
+What method is used to retrieve a value from context using a specific key?
+Use r.Context().Value(contextKey) with type assertion, which returns the value and a boolean indicating whether the type matches the expected type
+
+What is the recommended approach for handling a missing user in a request context?
+Use a panic with an error message like 'missing user in request', which will crash the application if a user is not found in the context
+
+How do you define a custom context key type in Go?
+Create a new type based on string, such as type contextKey string, which allows creating unique keys like const userContextKey contextKey = "user"
