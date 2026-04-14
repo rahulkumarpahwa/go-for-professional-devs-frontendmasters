@@ -191,8 +191,8 @@ curl -X POST "http://localhost:8080/workouts" \
         }'
 
 
-curl -X PUT "http://localhost:8080/workouts/6" \
-     -H "Authorization: Bearer M6BOKTWSQJL74GJJO5OIOMOG3V63MYRIKLUBZ6ILEUQUPCN7472Q" \
+curl -X PUT "http://localhost:8080/workouts/12" \
+     -H "Authorization: Bearer 3AXVYMFMFBR67CQKGDV55FB4LVQI2VYQPYC7DDIBYLVUD64NU3PQ" \
      -H "Content-Type: application/json" \
      -d '{
           "title": "Updated Cardio",

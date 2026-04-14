@@ -63,7 +63,7 @@ func (um *UserMiddleware) Authenticate(next http.Handler) http.Handler {
 		}
 
 		// setting the user in context
-		SetUser(r, user)
+		r = SetUser(r, user)
 		next.ServeHTTP(w, r)
 	})
 }

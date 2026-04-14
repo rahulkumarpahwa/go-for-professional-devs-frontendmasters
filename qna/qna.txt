@@ -639,3 +639,20 @@ Retrieve the current user, get the workout owner using GetWorkoutOwner, and comp
 
 How are delete and update operations secured to prevent unauthorized modifications?
 Check the current user's authentication, retrieve the workout owner, and compare the current user's ID with the workout owner's ID. If they don't match, prevent the operation and return a StatusForbidden error
+
+L58
+
+What steps are required to authenticate a user in this API?
+Create a user first, then use their username to request an authentication token, which can be used for subsequent API requests
+
+How does the workout update authorization work?
+Users can only update workouts they have created, and attempting to update another user's workout results in an 'unauthorized' error
+
+What information is stored when creating a new user?
+A new user requires a username and email address, which is then assigned a unique user ID in the database
+
+How long is an authentication token valid?
+Authentication tokens are valid for 24 hours before expiring
+
+What details are captured when creating a new workout?
+A workout includes details like the workout type, user ID, and description, and is associated with the authenticated user who creates it
