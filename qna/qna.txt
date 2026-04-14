@@ -497,3 +497,23 @@ Token scopes represent different levels of privilege or access, such as authenti
 
 What methods are defined in the TokenStore interface?
 The TokenStore interface includes three methods: CreateNewToken(), Insert(), and DeleteAllTokensForUser()
+
+L50
+
+What are the fields of the TokenHandler struct?
+The TokenHandler struct contains tokenStore of type store.TokenStore, userStore of type store.UserStore, and a logger
+
+What struct is used to decode client request data for token creation?
+The createTokenRequest struct, which contains Username and password fields of type string
+
+What are the steps for creating an authentication token in the HandleCreateToken method?
+Decode request payload, 2. Retrieve user by username, 3. Validate password using bcrypt, 4. Create a token with user ID and 24-hour lifespan
+
+What parameters are used when creating a new token?
+The method passes user.ID, a 24-hour duration, and tokens.scopeAuth when creating a new token
+
+What HTTP status codes are used in token creation error handling?
+Bad Request (400) for invalid payload
+Internal Server Error (500) for user retrieval or password matching issues
+Unauthorized (401) for invalid credentials
+Created (201) for successful token generation
