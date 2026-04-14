@@ -602,3 +602,23 @@ The authenticate middleware injects a user object into the request context, whic
 
 How does the getUser function work in the middleware?
 The getUser function extracts the user value from the request context, which was previously set by the authenticate middleware, allowing subsequent middleware or route handlers to check the user's authentication status.
+
+L56
+
+// Goose migration command to add a new column in workouts
+goose -dir migrations postgres "postgres://postgres:postgres@localhost:5433/postgres?sslmode=disable" up
+
+What SQL command is used to add a new column to an existing table?
+ALTER TABLE ... ADD COLUMN
+
+What does the ON DELETE CASCADE clause do in a foreign key relationship?
+When a referenced row is deleted, all related rows in the dependent table are also automatically deleted
+
+What type of data type is used for the user_id column in the example?
+BIGINT  
+
+What are the key considerations when adding a new column that references another table?
+Ensure existing data can be properly mapped, handle existing records, potentially delete existing data if no clear mapping exists
+
+What SQL command is used to delete all records from a table?
+DELETE FROM table_name
