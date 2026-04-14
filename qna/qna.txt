@@ -517,3 +517,20 @@ Bad Request (400) for invalid payload
 Internal Server Error (500) for user retrieval or password matching issues
 Unauthorized (401) for invalid credentials
 Created (201) for successful token generation
+
+L51
+
+How can you verify if a new user has been created in the PostgreSQL database?
+Use the SQL command 'select * from users' to list all users in the database, which will display the newly created user's details like username and email.
+
+What SQL command is used to view the tokens table in the database?
+Use 'select all from tokens' to view the entries in the tokens table, which will show details like user ID, token hash, expiry, and scope.
+
+What information is stored in the tokens table?
+The tokens table stores user ID, token hash, token expiry (24 hours from creation), and the token's scope (such as authentication).
+
+How can you test authentication token generation?
+Use a curl request to the /token/authentication endpoint with the correct username and password, which will generate an authentication token if credentials are valid.
+
+What happens if incorrect credentials are used during token authentication?
+If incorrect credentials are provided, the system will return an 'Invalid credentials' error and prevent token generation.
