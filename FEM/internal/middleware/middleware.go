@@ -67,3 +67,15 @@ func (um *UserMiddleware) Authenticate(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+func (um *UserMiddleware) RequireUser(next http.HandlerFunc) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		user := GetUser(r)
+		if user.IsAnonymous() {
+			utils.WriteJson(w, http.StatusUnauthorized, utils.Envelope{"error": "You must be loggedin to access the route!"})
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
+
+}

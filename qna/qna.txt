@@ -585,3 +585,20 @@ If the authorization header is invalid (wrong format or missing 'Bearer'), the m
 
 How does the middleware handle an invalid or expired token?
 If the token is invalid, cannot be used to retrieve a user, or has expired, the middleware returns an HTTP 401 Unauthorized status with an error message indicating the token is invalid or expired.
+
+L55
+
+How can routes be grouped in Chi router to apply middleware?
+Use r.Group() method, which creates a new inline mux with a copy of the middleware stack. Inside the group, you can use r.Use() to add middleware that will be applied to all routes within that group.
+
+What does the RequireUser middleware function do?
+It checks if the user is anonymous and blocks access to the route if they are not logged in. If the user is anonymous, it returns an HTTP 401 Unauthorized status with an error message indicating that the user must be logged in.
+
+How can middleware be added to specific routes in Chi router?
+You can wrap individual route handlers with middleware functions like app.Middleware.RequireUser(), which allows fine-grained control over authentication for specific routes.
+
+What is the purpose of the authenticate middleware?
+The authenticate middleware injects a user object into the request context, which can be either an anonymous or logged-in user, setting the stage for more detailed access control.
+
+How does the getUser function work in the middleware?
+The getUser function extracts the user value from the request context, which was previously set by the authenticate middleware, allowing subsequent middleware or route handlers to check the user's authentication status.
