@@ -476,7 +476,24 @@ What PostgreSQL data type is used for storing byte array values in the tokens ta
 bytea
 
 What command is used to apply database migrations with Goose?
-goose postgres 'connection_string'
+goose postgres 'connection_string' up
 
 What database schema fields are defined in the tokens table?
 hash (bytea), user_id (bigint), expiry (timestamp with time zone), scope (text)
+
+L49
+
+What are the key fields in the Token struct?
+The Token struct contains: PlainText (string), Hash (slice of bytes), UserID (int), Expiry (time.Time), and Scope (string)
+
+What function is used to generate a random token?
+The GenerateToken function uses rand.read() to generate a slice of 32 random bytes, and then encodes it using base32.StdEncoding with no padding
+
+What hashing algorithm is used for tokens?
+The tokens use SHA-256 hashing from the crypto/sha256 package to hash the token's plaintext
+
+What is the purpose of token scopes?
+Token scopes represent different levels of privilege or access, such as authentication, authorization, mod, admin, or grandfathered-in scopes
+
+What methods are defined in the TokenStore interface?
+The TokenStore interface includes three methods: CreateNewToken(), Insert(), and DeleteAllTokensForUser()
