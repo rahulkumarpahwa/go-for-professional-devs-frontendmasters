@@ -8,8 +8,8 @@ import (
 )
 
 type Workout struct {
-	ID int `json:"id"`
-	//add the user id later here.
+	ID              int            `json:"id"`
+	UserID          int            `json:"user_id"`
 	Title           string         `json:"title"`
 	Description     string         `json:"description"`
 	DurationMinutes int            `json:"duration_minutes"`
@@ -44,7 +44,8 @@ type WorkoutStore interface {
 	CreateWorkout(*Workout) (*Workout, error)
 	GetWorkoutById(int int64) (*Workout, error)
 	UpdateWorkout(*Workout) error
-	DeleteWorkout(int int64) error
+	DeleteWorkout(id int64) error
+	GetWorkoutOwner(id int64) (int, error)
 }
 
 func (pgws *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error) {
@@ -56,10 +57,10 @@ func (pgws *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, err
 	// we can't commit after rollback.
 	defer tx.Rollback()
 
-	query := `INSERT INTO workouts (title, description, duration_minutes, calories_burned) 
-	VALUES ($1, $2, $3, $4) RETURNING id;`
+	query := `INSERT INTO workouts (title, description, duration_minutes, calories_burned, user_id) 
+	VALUES ($1, $2, $3, $4, $5) RETURNING id;`
 
-	err = tx.QueryRow(query, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurned).Scan(&workout.ID)
+	err = tx.QueryRow(query, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurned, workout.UserID).Scan(&workout.ID)
 
 	if err == sql.ErrNoRows {
 		return nil, err
@@ -100,12 +101,12 @@ func (pgws *PostgresWorkoutStore) GetWorkoutById(id int64) (*Workout, error) {
 	// we can't commit after rollback.
 	defer tx.Rollback()
 
-	query := `SELECT id, title, description, duration_minutes, calories_burned, created_at, updated_at FROM workouts WHERE id = $1;`
+	query := `SELECT id, user_id, title, description, duration_minutes, calories_burned, created_at, updated_at FROM workouts WHERE id = $1;`
 
 	row := tx.QueryRow(query, id)
 
 	workout := &Workout{}
-	err = row.Scan(&workout.ID, &workout.Title, &workout.Description, &workout.DurationMinutes, &workout.CaloriesBurned, &workout.CreatedAt, &workout.UpdatedAt)
+	err = row.Scan(&workout.ID, &workout.UserID, &workout.Title, &workout.Description, &workout.DurationMinutes, &workout.CaloriesBurned, &workout.CreatedAt, &workout.UpdatedAt)
 
 	if err == sql.ErrNoRows {
 		return nil, err
@@ -227,4 +228,17 @@ func (pgws *PostgresWorkoutStore) DeleteWorkout(id int64) error {
 	}
 
 	return tx.Commit()
+}
+
+func (pgws *PostgresWorkoutStore) GetWorkoutOwner(workoutID int64) (int, error) {
+	var userID int
+
+	query := `SELECT user_id FROM workouts WHERE id = $1`
+
+	err := pgws.db.QueryRow(query, workoutID).Scan(&userID)
+	if err != nil {
+		return 0, err
+	}
+
+	return userID, nil
 }
