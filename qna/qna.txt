@@ -534,3 +534,20 @@ Use a curl request to the /token/authentication endpoint with the correct userna
 
 What happens if incorrect credentials are used during token authentication?
 If incorrect credentials are provided, the system will return an 'Invalid credentials' error and prevent token generation.
+
+L52
+
+What is the purpose of the AnonymousUser variable in the code?
+The AnonymousUser is an empty user struct used to validate whether a user is logged in or not, representing users who have not yet registered or logged into the application.
+
+What method is implemented to check if a user is anonymous?
+The IsAnonymous() method is implemented, which returns a boolean by comparing the current user struct to the AnonymousUser. If they are equivalent, the user is considered anonymous.
+
+What type of database query is used in the GetUserToken method?
+An INNER JOIN query is used, which selects user table values and matches them with token table values based on the user ID, while also checking the token hash, scope, and expiration time.
+
+What security mechanism is implemented when retrieving a user's token?
+The GetUserToken method uses SHA-256 hashing to generate a hash of the token, and then queries the database to verify the token's validity, checking its hash, scope, and ensuring it has not expired.
+
+What specific values are scanned when retrieving a user from the token?
+The method scans the following user values: ID, Username, Email, PasswordHash, Bio, CreatedAt, and UpdatedAt from the database query result.
