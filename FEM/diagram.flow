@@ -1,0 +1,73 @@
+graph TD
+    Start([Application Start]) --> Main["main.go<br/>Parse CLI Flags<br/>Set Port 8080"]
+    Main --> AppInit["app.NewApplication<br/>Initialize App"]
+    
+    AppInit --> DBOpen["Store.Open<br/>Connect PostgreSQL"]
+    DBOpen --> Migrate["Execute Migrations<br/>Create Tables"]
+    Migrate --> Stores["Initialize Stores:<br/>- WorkoutStore<br/>- UserStore<br/>- TokenStore"]
+    
+    Stores --> Handlers["Initialize Handlers:<br/>- WorkoutHandler<br/>- UserHandler<br/>- TokenHandler"]
+    Handlers --> Routes["routes.SetupRoutes<br/>Register Chi Router"]
+    Routes --> Server["Start HTTP Server<br/>Listen on :8080"]
+    
+    Server --> HTTPReq["HTTP Request Received"]
+    
+    HTTPReq --> AuthMW["Middleware.Authenticate<br/>Check Token"]
+    
+    AuthMW -->|No Auth Required| PublicRoutes["Public Routes:<br/>POST /users<br/>POST /tokens/authentication<br/>GET /health"]
+    AuthMW -->|Auth Required| ProtectedMW["Middleware.RequireUser<br/>Validate User"]
+    
+    ProtectedMW -->|Valid User| ProtectedRoutes["Protected Routes:<br/>GET /workouts/{id}<br/>POST /workouts<br/>PUT /workouts/{id}<br/>DELETE /workouts/{id}"]
+    ProtectedMW -->|Invalid User| AuthError["Return 401/403"]
+    
+    PublicRoutes --> Router{"Route<br/>Handler?"}
+    ProtectedRoutes --> Router
+    
+    Router -->|RegisterUser| UserHandler["UserHandler<br/>HandleRegisterUser"]
+    Router -->|CreateToken| TokenHandler["TokenHandler<br/>HandleCreateToken"]
+    Router -->|GetWorkout| WorkoutHandler["WorkoutHandler<br/>HandleGetWorkoutById"]
+    Router -->|CreateWorkout| WorkoutHandler2["WorkoutHandler<br/>HandleCreateWorkout"]
+    Router -->|UpdateWorkout| WorkoutHandler3["WorkoutHandler<br/>HandleUpdateWorkoutByID"]
+    Router -->|DeleteWorkout| WorkoutHandler4["WorkoutHandler<br/>HandleDeleteWorkoutByID"]
+    Router -->|Health| HealthCheck["Health Check"]
+    
+    UserHandler --> UserStore["UserStore<br/>Database Operations"]
+    TokenHandler --> TokenStore["TokenStore<br/>Database Operations"]
+    WorkoutHandler --> WorkoutStore["WorkoutStore<br/>GetWorkoutById"]
+    WorkoutHandler2 --> WorkoutStore2["WorkoutStore<br/>CreateWorkout"]
+    WorkoutHandler3 --> WorkoutStore3["WorkoutStore<br/>UpdateWorkout"]
+    WorkoutHandler4 --> WorkoutStore4["WorkoutStore<br/>DeleteWorkout"]
+    
+    UserStore --> DB1["PostgreSQL<br/>users table"]
+    TokenStore --> DB2["PostgreSQL<br/>tokens table"]
+    WorkoutStore --> DB3["PostgreSQL<br/>workouts table"]
+    WorkoutStore2 --> DB4["PostgreSQL<br/>workouts<br/>workout_entries tables"]
+    WorkoutStore3 --> DB5["PostgreSQL<br/>update workouts<br/>delete/insert entries"]
+    WorkoutStore4 --> DB6["PostgreSQL<br/>delete workout"]
+    
+    DB1 --> TxCommit["Begin Transaction<br/>Execute Query<br/>Commit/Rollback"]
+    DB2 --> TxCommit
+    DB3 --> TxCommit
+    DB4 --> TxCommit
+    DB5 --> TxCommit
+    DB6 --> TxCommit
+    
+    TxCommit --> Response["Build JSON Response"]
+    HealthCheck --> Response
+    AuthError --> ErrorResponse["Build Error Response"]
+    
+    Response --> HTTPResp["Send HTTP Response<br/>200/201/400/500..."]
+    ErrorResponse --> HTTPResp
+    HTTPResp --> End([Request Complete])
+    
+    style Start fill:#90EE90
+    style End fill:#FFB6C6
+    style Server fill:#87CEEB
+    style AuthMW fill:#FFD700
+    style ProtectedMW fill:#FFD700
+    style DB1 fill:#DDA0DD
+    style DB2 fill:#DDA0DD
+    style DB3 fill:#DDA0DD
+    style DB4 fill:#DDA0DD
+    style DB5 fill:#DDA0DD
+    style DB6 fill:#DDA0DD

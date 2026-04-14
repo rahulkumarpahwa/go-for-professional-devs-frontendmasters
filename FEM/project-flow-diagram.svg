@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1800">
+  <defs>
+    <style>
+      .box { fill: #E8F4F8; stroke: #333; stroke-width: 2; }
+      .start { fill: #90EE90; stroke: #333; stroke-width: 2; }
+      .end { fill: #FFB6C6; stroke: #333; stroke-width: 2; }
+      .server { fill: #87CEEB; stroke: #333; stroke-width: 2; }
+      .auth { fill: #FFD700; stroke: #333; stroke-width: 2; }
+      .database { fill: #DDA0DD; stroke: #333; stroke-width: 2; }
+      .handler { fill: #F0E68C; stroke: #333; stroke-width: 2; }
+      .store { fill: #FFE4B5; stroke: #333; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 12px; text-anchor: middle; }
+      .title { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .arrow { stroke: #333; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .label { font-family: Arial, sans-serif; font-size: 10px; fill: #333; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="30" class="title" text-anchor="middle">FEM Workout Fitness Application - Complete Flow Diagram</text>
+
+  <!-- STARTUP PHASE -->
+  <!-- Start -->
+  <ellipse cx="700" cy="80" rx="50" ry="30" class="start"/>
+  <text x="700" y="85" class="text">Application Start</text>
+
+  <!-- main.go -->
+  <rect x="600" y="130" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="155" class="text">main.go</text>
+  <text x="700" y="170" class="text" font-size="11">Parse CLI Flags | Port 8080</text>
+
+  <!-- Arrow -->
+  <path d="M 700 110 L 700 130" class="arrow"/>
+
+  <!-- AppInit -->
+  <rect x="600" y="210" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="235" class="text">app.NewApplication</text>
+  <text x="700" y="250" class="text" font-size="11">Initialize App</text>
+
+  <!-- Arrow -->
+  <path d="M 700 190 L 700 210" class="arrow"/>
+
+  <!-- DB Open -->
+  <rect x="600" y="290" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="315" class="text">Store.Open</text>
+  <text x="700" y="330" class="text" font-size="11">Connect PostgreSQL</text>
+
+  <!-- Arrow -->
+  <path d="M 700 270 L 700 290" class="arrow"/>
+
+  <!-- Migrations -->
+  <rect x="600" y="370" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="395" class="text">Execute Migrations</text>
+  <text x="700" y="410" class="text" font-size="11">Create Tables</text>
+
+  <!-- Arrow -->
+  <path d="M 700 350 L 700 370" class="arrow"/>
+
+  <!-- Stores Init -->
+  <rect x="550" y="450" width="300" height="80" class="store" rx="5"/>
+  <text x="700" y="475" class="text">Initialize Stores:</text>
+  <text x="700" y="492" class="text" font-size="11">WorkoutStore | UserStore</text>
+  <text x="700" y="505" class="text" font-size="11">TokenStore</text>
+
+  <!-- Arrow -->
+  <path d="M 700 430 L 700 450" class="arrow"/>
+
+  <!-- Handlers Init -->
+  <rect x="550" y="550" width="300" height="80" class="handler" rx="5"/>
+  <text x="700" y="575" class="text">Initialize Handlers:</text>
+  <text x="700" y="592" class="text" font-size="11">WorkoutHandler | UserHandler</text>
+  <text x="700" y="605" class="text" font-size="11">TokenHandler</text>
+
+  <!-- Arrow -->
+  <path d="M 700 530 L 700 550" class="arrow"/>
+
+  <!-- Routes -->
+  <rect x="600" y="650" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="675" class="text">SetupRoutes</text>
+  <text x="700" y="690" class="text" font-size="11">Register Chi Router</text>
+
+  <!-- Arrow -->
+  <path d="M 700 630 L 700 650" class="arrow"/>
+
+  <!-- Server Start -->
+  <rect x="600" y="730" width="200" height="60" class="server" rx="5"/>
+  <text x="700" y="755" class="text">Start HTTP Server</text>
+  <text x="700" y="770" class="text" font-size="11">Listen on :8080</text>
+
+  <!-- Arrow -->
+  <path d="M 700 710 L 700 730" class="arrow"/>
+
+  <!-- REQUEST HANDLING PHASE -->
+  <!-- HTTP Request -->
+  <rect x="600" y="810" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="835" class="text">HTTP Request</text>
+  <text x="700" y="850" class="text" font-size="11">Received</text>
+
+  <!-- Arrow -->
+  <path d="M 700 790 L 700 810" class="arrow"/>
+
+  <!-- Authenticate Middleware -->
+  <rect x="600" y="890" width="200" height="60" class="auth" rx="5"/>
+  <text x="700" y="915" class="text">Middleware.Authenticate</text>
+  <text x="700" y="930" class="text" font-size="11">Check Token</text>
+
+  <!-- Arrow -->
+  <path d="M 700 870 L 700 890" class="arrow"/>
+
+  <!-- Public Routes -->
+  <rect x="300" y="970" width="280" height="90" class="box" rx="5"/>
+  <text x="440" y="995" class="text">Public Routes:</text>
+  <text x="440" y="1012" class="text" font-size="11">POST /users</text>
+  <text x="440" y="1027" class="text" font-size="11">POST /tokens/authentication</text>
+  <text x="440" y="1042" class="text" font-size="11">GET /health</text>
+
+  <!-- Arrow -->
+  <path d="M 600 920 L 500 970" class="arrow"/>
+  <text x="540" y="945" class="label">No Auth</text>
+
+  <!-- Protected Routes -->
+  <rect x="820" y="970" width="280" height="110" class="box" rx="5"/>
+  <text x="960" y="995" class="text">Protected Routes:</text>
+  <text x="960" y="1012" class="text" font-size="11">GET /workouts/{id}</text>
+  <text x="960" y="1027" class="text" font-size="11">POST /workouts</text>
+  <text x="960" y="1042" class="text" font-size="11">PUT /workouts/{id}</text>
+  <text x="960" y="1057" class="text" font-size="11">DELETE /workouts/{id}</text>
+
+  <!-- Arrow -->
+  <path d="M 800 920 L 900 970" class="arrow"/>
+  <text x="850" y="945" class="label">Auth Required</text>
+
+  <!-- RequireUser Middleware -->
+  <rect x="820" y="1110" width="280" height="60" class="auth" rx="5"/>
+  <text x="960" y="1135" class="text">Middleware.RequireUser</text>
+  <text x="960" y="1150" class="text" font-size="11">Validate User</text>
+
+  <!-- Arrow from Protected Routes to RequireUser -->
+  <path d="M 960 1080 L 960 1110" class="arrow"/>
+
+  <!-- Handler Selection -->
+  <rect x="350" y="1200" width="200" height="80" class="handler" rx="5"/>
+  <text x="450" y="1228" class="text" font-weight="bold" font-size="13">Route Handlers</text>
+  <text x="450" y="1245" class="text" font-size="11">UserHandler</text>
+  <text x="450" y="1260" class="text" font-size="11">TokenHandler</text>
+  <text x="450" y="1275" class="text" font-size="11">WorkoutHandler</text>
+
+  <!-- Arrow from Public -->
+  <path d="M 440 1060 L 450 1200" class="arrow"/>
+
+  <!-- Handler Selection -->
+  <rect x="850" y="1200" width="200" height="80" class="handler" rx="5"/>
+  <text x="950" y="1230" class="text" font-weight="bold">WorkoutOperations</text>
+  <text x="950" y="1250" class="text" font-size="11">Create/Read/Update</text>
+  <text x="950" y="1265" class="text" font-size="11">Delete Workouts</text>
+
+  <!-- Arrow from Protected -->
+  <path d="M 960 1170 L 950 1200" class="arrow"/>
+
+  <!-- Stores -->
+  <rect x="300" y="1320" width="200" height="70" class="store" rx="5"/>
+  <text x="400" y="1345" class="text">UserStore</text>
+  <text x="400" y="1362" class="text" font-size="11">Database Operations</text>
+
+  <!-- Arrow from handlers -->
+  <path d="M 400 1280 L 400 1320" class="arrow"/>
+
+  <rect x="850" y="1320" width="200" height="70" class="store" rx="5"/>
+  <text x="950" y="1345" class="text">WorkoutStore</text>
+  <text x="950" y="1362" class="text" font-size="11">CRUD Operations</text>
+
+  <!-- Arrow from workout handlers -->
+  <path d="M 950 1280 L 950 1320" class="arrow"/>
+
+  <!-- Databases -->
+  <rect x="250" y="1430" width="220" height="70" class="database" rx="5"/>
+  <text x="360" y="1458" class="text">PostgreSQL</text>
+  <text x="360" y="1475" class="text" font-size="11">users | tokens tables</text>
+
+  <!-- Arrow -->
+  <path d="M 400 1390 L 360 1430" class="arrow"/>
+
+  <rect x="850" y="1430" width="220" height="70" class="database" rx="5"/>
+  <text x="960" y="1458" class="text">PostgreSQL</text>
+  <text x="960" y="1475" class="text" font-size="11">workouts table</text>
+
+  <!-- Arrow -->
+  <path d="M 950 1390 L 960 1430" class="arrow"/>
+
+  <!-- Transactions -->
+  <rect x="550" y="1540" width="300" height="80" class="box" rx="5"/>
+  <text x="700" y="1565" class="text">Database Transaction:</text>
+  <text x="700" y="1582" class="text" font-size="11">Begin | Execute Query</text>
+  <text x="700" y="1597" class="text" font-size="11">Commit / Rollback</text>
+
+  <!-- Arrows to Transaction -->
+  <path d="M 360 1500 L 600 1540" class="arrow"/>
+  <path d="M 960 1500 L 800 1540" class="arrow"/>
+
+  <!-- Response Building -->
+  <rect x="600" y="1660" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="1685" class="text">Build Response</text>
+  <text x="700" y="1700" class="text" font-size="11">JSON | Status Code</text>
+
+  <!-- Arrow -->
+  <path d="M 700 1620 L 700 1660" class="arrow"/>
+
+  <!-- HTTP Response -->
+  <rect x="600" y="1740" width="200" height="60" class="box" rx="5"/>
+  <text x="700" y="1765" class="text">Send HTTP Response</text>
+  <text x="700" y="1780" class="text" font-size="11">200 | 201 | 400 | 500</text>
+
+  <!-- Arrow -->
+  <path d="M 700 1720 L 700 1740" class="arrow"/>
+
+  <!-- End -->
+  <ellipse cx="700" cy="1830" rx="50" ry="30" class="end"/>
+  <text x="700" y="1835" class="text">Request Complete</text>
+
+  <!-- Arrow -->
+  <path d="M 700 1800 L 700 1800" class="arrow"/>
+
+  <!-- Legend -->
+  <text x="50" y="1500" class="title" font-size="13">Legend:</text>
+  <rect x="30" y="1520" width="20" height="20" class="start"/>
+  <text x="60" y="1535" class="text" text-anchor="start">Application Start/End</text>
+  <rect x="30" y="1560" width="20" height="20" class="server"/>
+  <text x="60" y="1575" class="text" text-anchor="start">Server</text>
+  <rect x="30" y="1600" width="20" height="20" class="auth"/>
+  <text x="60" y="1615" class="text" text-anchor="start">Authentication/Middleware</text>
+  <rect x="30" y="1640" width="20" height="20" class="handler"/>
+  <text x="60" y="1655" class="text" text-anchor="start">Handlers</text>
+  <rect x="30" y="1680" width="20" height="20" class="store"/>
+  <text x="60" y="1695" class="text" text-anchor="start">Data Stores</text>
+  <rect x="30" y="1720" width="20" height="20" class="database"/>
+  <text x="60" y="1735" class="text" text-anchor="start">Database</text>
+</svg>
