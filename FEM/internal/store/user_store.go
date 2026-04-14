@@ -68,7 +68,7 @@ type UserStore interface {
 	CreateUser(*User) error
 	GetUserByUsername(string) (*User, error)
 	UpdateUser(*User) error
-	GetUserToken(string, string) (*User, error)
+	GetUserToken(scope, plainTextPassword string) (*User, error)
 }
 
 func (pgus *PostgresUserStore) CreateUser(user *User) error {

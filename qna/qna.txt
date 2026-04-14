@@ -568,3 +568,20 @@ Use a panic with an error message like 'missing user in request', which will cra
 
 How do you define a custom context key type in Go?
 Create a new type based on string, such as type contextKey string, which allows creating unique keys like const userContextKey contextKey = "user"
+
+L54
+
+What is the purpose of the authenticate function in the middleware?
+The authenticate function wraps existing HTTP handler functions to intercept and validate incoming requests, checking for authorization headers and setting the appropriate user context before passing the request to the next handler in the chain.
+
+How does the middleware handle requests without an authorization header?
+If no authorization header is present, the middleware sets the user context to an anonymous user using store.AnonymousUser and then passes the request to the next handler in the chain.
+
+What validation steps does the middleware perform on the authorization header?
+The middleware checks that the authorization header: 1) Contains two parts when split, 2) Starts with the word 'Bearer', and 3) Contains a valid token that can be used to retrieve a user.
+
+What HTTP status code is returned if the authorization header is invalid?
+If the authorization header is invalid (wrong format or missing 'Bearer'), the middleware returns an HTTP 401 Unauthorized status with an error message about an invalid authorization header.
+
+How does the middleware handle an invalid or expired token?
+If the token is invalid, cannot be used to retrieve a user, or has expired, the middleware returns an HTTP 401 Unauthorized status with an error message indicating the token is invalid or expired.
