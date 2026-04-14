@@ -622,3 +622,20 @@ Ensure existing data can be properly mapped, handle existing records, potentiall
 
 What SQL command is used to delete all records from a table?
 DELETE FROM table_name
+
+L57
+
+What modifications are needed in the workout_store to support user ownership of workouts?
+Add a User ID field to the workout struct with a json tag, create a GetWorkoutOwner function in the workout store interface that returns the user ID of the workout owner
+
+What changes are required when creating a workout to support user ownership?
+Modify the CreateWorkout function to include user_id as the first argument and add the user ID to the database insertion query, ensuring each workout is associated with a specific user
+
+How is user authentication checked when creating a workout?
+Use middleware.GetUser to extract the current user, perform a validity check to ensure the user is not anonymous, and set the workout's UserID to the current user's ID
+
+What authorization checks are implemented for updating a workout?
+Retrieve the current user, get the workout owner using GetWorkoutOwner, and compare the current user's ID with the workout owner's ID. If they don't match, return a StatusForbidden error
+
+How are delete and update operations secured to prevent unauthorized modifications?
+Check the current user's authentication, retrieve the workout owner, and compare the current user's ID with the workout owner's ID. If they don't match, prevent the operation and return a StatusForbidden error
