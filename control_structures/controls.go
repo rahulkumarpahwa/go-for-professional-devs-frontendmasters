@@ -1,4 +1,4 @@
-package controlstructures
+package main
 
 import "fmt"
 
@@ -27,5 +27,26 @@ func main() {
 	default:
 		fmt.Println("Enter a valid!")
 	}
+
+	//loops:
+
+	for i := 0; i < 5; i++ {
+		fmt.Println("this is i: ", i)
+	}
+
+	counter := 0;
+	for counter < 3{
+		fmt.Println("Counter: ", counter)
+		counter++;
+	}
+
+	// infinite loop
+	interations := 0
+	for {
+		if interations > 3 {
+			break;
+		}
+		interations++
+ 	} 
 
 }
