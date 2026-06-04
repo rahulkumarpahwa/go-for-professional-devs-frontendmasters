@@ -12,4 +12,11 @@ func main() {
 		{}, {2, 3, 4},
 	}
 	fmt.Printf("this is out a matrix  %v\n", matrix)
+
+	// Slices
+	allNumbers := numbers[:]
+	firstThree := numbers[0:3]
+	allNumbers = append(allNumbers, firstThree...)
+
+	
 }
