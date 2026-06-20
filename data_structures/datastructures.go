@@ -35,5 +35,29 @@ func main() {
 	fruits = append(fruits, moreFruits...)
 	fmt.Printf("these are my fruits with more fruits: %v\n", fruits);
 
+	// maps:
 
+	capitalCities := map[string]string{
+		"India" : "New Delhi",
+		"USA" : "Washington D.C.",
+		"UK" : "London",
+	}
+
+	fmt.Printf("The capital of the USA is: %v\n", capitalCities["USA"])
+	fmt.Printf("The capital of the UK is: %v\n", capitalCities["UK"])
+	fmt.Printf("The capital of Germany is: %v\n", capitalCities["Germany"]) // if key is not present it will return zero value of the type which is empty string in this case
+
+	// checking if a key exists in the map
+	capital, exists := capitalCities["Germany"]
+	if exists {
+		fmt.Printf("The capital of Germany is: %v\n", capital)
+	} else {
+		fmt.Println("Germany is not in the map.")
+	}
+
+	// inbuilt function to get the length of the map
+	fmt.Printf("The number of countries in the map is: %v\n", len(capitalCities))
+	// deleting a key from the map
+	delete(capitalCities, "UK") // deleting a key from the map
+	fmt.Printf("After deleting UK, the map is: %v\n", capitalCities);
 }
