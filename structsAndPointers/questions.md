@@ -12,3 +12,18 @@
 
 5. How are structs passed in Go by default?
 5. In Go, structs are passed by value, which means a complete copy of the struct is created when passed to a function. Modifications to the struct within the function will not affect the original struct unless passed by reference using a pointer
+
+6. What is the difference between passing a struct by value versus passing a struct by pointer in Go?
+6. When passing a struct by value, a copy of the struct is created, and modifications are only local to the function's scope. When passing a struct by pointer, the function can modify the original struct directly, and changes persist outside the function's scope.
+
+7. How do you create a pointer to a variable in Go?
+7. To create a pointer to a variable, use the ampersand (&) symbol before the variable name, which returns the memory address of the variable. To dereference and modify the value, use the asterisk (*) symbol before the pointer variable.
+
+8. What is a method receiver in Go?
+8. A method receiver is a way to define methods on a specific struct type. It allows you to associate a function with a struct by declaring the receiver type in parentheses before the function name, enabling method calls directly on struct instances.
+
+9. What naming convention determines a method or field's visibility in Go?
+9. Methods and fields starting with a capital letter are exported and can be accessed from other packages. Methods and fields starting with a lowercase letter are only accessible within the same package.
+
+10. When should you consider using pointers instead of passing values in Go?
+10. Consider using pointers when you want to modify the original value across multiple functions, avoid copying large structs, or when you need to persist changes outside a function's scope. A good rule of thumb is to use pointers when passing structs through multiple functions repeatedly.

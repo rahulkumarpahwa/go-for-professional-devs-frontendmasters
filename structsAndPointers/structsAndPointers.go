@@ -18,7 +18,7 @@ type Address struct {
 	Zip    string
 }
 
-// Structs can also be nested, meaning that a struct can contain another struct as a field. This allows for more complex data structures to be created. For example, we can create a struct called "Employee" that contains a "Person" struct and an "Address" struct as fields.	
+// Structs can also be nested, meaning that a struct can contain another struct as a field. This allows for more complex data structures to be created. For example, we can create a struct called "Employee" that contains a "Person" struct and an "Address" struct as fields.
 
 type contactInfo struct {
 	Email   string
@@ -57,13 +57,42 @@ func main() {
 	contact := contactInfo{
 		Email: "apple@apple.com",
 		Phone: "123-456-7890",
-		Address: Address{		
-		Street: "123 Main St",
-		City:   "Anytown",
-		State:  "CA",	
-	Zip:    "12345",
+		Address: Address{
+			Street: "123 Main St",
+			City:   "Anytown",
+			State:  "CA",
+			Zip:    "12345",
 		},
 	}
-	fmt.Println("Contact Info:", contact)	
+	fmt.Println("Contact Info:", contact)
 
+
+	// Using pointers to structs
+	fmt.Println("Person 1 before modification:", person1)
+	personPointer := &person1 // creating a pointer to the person1 struct
+	ModifyPerson(personPointer)
+
+	x := 20	
+	ptr := &x // creating a pointer to the variable x
+	fmt.Println("Value of x before modification:", x)
+	fmt.Println("Pointer to x:", ptr)
+	*ptr = 30 // modifying the value of x using the pointer
+	fmt.Println("Value of x after modification:", x)
+
+	// structs allow us to define methods on them, which can be used to modify the fields of the struct. This is done by defining a method with a receiver of the struct type. The receiver is a special parameter that allows the method to access and modify the fields of the struct. In this example, we define a method called "modifyPersonName" that takes a string parameter and modifies the Name field of the Person struct.
+	// Using methods with structs
+	person1.modifyPersonName("John Smith")
+	fmt.Println("Person 1 after name modification:", person1)
+
+}
+
+func ModifyPerson(p *Person) {
+	// Modifying fields of a struct using a pointer
+	p.Age = 35
+	fmt.Println("Person after modification:", *p)
+}
+
+func (p *Person) modifyPersonName(name string) {
+	p.Name = name
+	fmt.Println("Person name after modification:", p.Name)
 }
