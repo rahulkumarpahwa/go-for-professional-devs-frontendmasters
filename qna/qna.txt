@@ -673,3 +673,18 @@ A workout includes details like the workout type, user ID, and description, and 
 
 5. Why can't you directly use an integer value like 10 for a pointer int field?
 5. In Go, you cannot directly use an integer as a pointer. You must create a separate variable and use its address or use a helper function to convert the value to a pointer
+
+6. What are the key requirements for a workout entry in this testing scenario?
+6. A workout entry cannot have both reps and duration in seconds simultaneously, and it requires fields like exercise name, sets, and order index
+
+7. What method is used to validate a created workout in the test case?
+7. The test case validates the created workout by checking multiple aspects: calling CreateWorkout, checking for expected errors, asserting equality of workout fields like title and description, retrieving the workout by ID, and comparing the retrieved workout's details
+
+8. How does the test case handle different testing scenarios?
+8. The test case uses a test fixture with a range of test cases, where each test can expect either an error or a successful creation, and includes detailed assertions to validate workout and entry details
+
+9. What testing package is used for assertions in this code?
+9. The github.com/stretchr/testify/assert package is used for making assertions in the test cases
+
+10. What steps are taken to verify a retrieved workout in the test case?
+10. The test retrieves the workout by ID, checks for no retrieval errors, compares the created workout's ID and calories burned, verifies the number of entries, and iterates through entries to validate individual entry fields like exercise name, sets, and order index
