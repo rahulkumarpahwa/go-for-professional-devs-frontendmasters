@@ -656,3 +656,20 @@ Authentication tokens are valid for 24 hours before expiring
 
 What details are captured when creating a new workout?
 A workout includes details like the workout type, user ID, and description, and is associated with the authenticated user who creates it
+
+
+// test lectures :
+1. What naming convention does Go use to identify test files?
+1. Test files in Go must end with '_test.go'
+
+2. How does Go identify which functions are tests?
+2. Functions that start with the word 'Test' followed by a name are considered test functions
+
+3. What is the purpose of creating a helper function like intPtr in this context?
+3. To convert an integer value to a pointer to an integer, which is necessary when working with struct fields that require pointer references
+
+4. What fields are included in the anonymous test struct for creating workout tests?
+4. The anonymous test struct includes: Name (string), Workout (pointer to workout), and WantError (boolean)
+
+5. Why can't you directly use an integer value like 10 for a pointer int field?
+5. In Go, you cannot directly use an integer as a pointer. You must create a separate variable and use its address or use a helper function to convert the value to a pointer
