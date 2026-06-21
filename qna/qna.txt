@@ -688,3 +688,18 @@ A workout includes details like the workout type, user ID, and description, and 
 
 10. What steps are taken to verify a retrieved workout in the test case?
 10. The test retrieves the workout by ID, checks for no retrieval errors, compares the created workout's ID and calories burned, verifies the number of entries, and iterates through entries to validate individual entry fields like exercise name, sets, and order index
+
+11. What command is used to run tests in a specific directory in Go?
+11. go test, which runs all tests in the current directory
+
+12. What is a table test in Go?
+12. A slice that is iterated over to test multiple scenarios, representing a simple way to create multiple test cases
+
+13. How can you run tests across multiple directories in a Go project?
+13. Use the go test command followed by a dot (.) and specify how many layers deep you want to search, e.g., go test ./... runs tests in all subdirectories
+
+14. What is a recommended approach when testing database operations?
+14. Test not just the write operation, but also retrieve and validate the data to fully exercise the database functionality
+
+15. What is the benefit of co-locating tests with the files they are testing?
+15. It makes importing and accessing the code under test easier, as tests can be in the same package and don't require complex import statements
